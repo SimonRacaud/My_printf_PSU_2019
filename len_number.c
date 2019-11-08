@@ -5,6 +5,9 @@
 ** get length of a number (nb of digits)
 */
 
+#include "my.h"
+#include <stdlib.h>
+
 int is_digit(char c, int len_nbr)
 {
     if ((c > '0' && c <= '9') || (c == '0' && len_nbr > 0))
@@ -12,7 +15,7 @@ int is_digit(char c, int len_nbr)
     return (0);
 }
 
-static void incr_len(unsigned int *len, char c, char after_dot)
+static void incr_len(int *len, char c, char after_dot)
 {
     if (is_digit(c, len[0])) {
         len[0]++;

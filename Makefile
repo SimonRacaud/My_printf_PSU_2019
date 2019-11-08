@@ -5,9 +5,13 @@
 ## void
 ##
 
-SRC	=	main.c		\
-		my_printf.c	\
-		my_put_double
+SRC	=	main_test.c		\
+		my_printf.c		\
+		my_put_double.c		\
+		my_printf_display.c	\
+		my_printf_misc.c	\
+		search.c		\
+		len_number.c
 
 OBJ	=	$(SRC:.c=.o)
 
