@@ -1,0 +1,52 @@
+/*
+** EPITECH PROJECT, 2019
+** PSU_my_printf_2019
+** File description:
+** header
+*/
+
+#ifndef H_PRINTF
+#define H_PRINTF
+
+#include <stdarg.h>
+
+typedef struct arg {
+    char flags[6];
+    int width;
+    int precision;
+    char length[3];
+    char spec[2];
+} arg_t;
+
+void disp_int(arg_t *arg, va_list *ap);
+void disp_uint_xX(arg_t *arg, va_list *ap);
+void disp_uint_o(arg_t *arg, va_list *ap);
+void disp_uint_b(arg_t *arg, va_list *ap);
+void disp_uint_u(arg_t *arg, va_list *ap);
+void disp_char(arg_t *arg, va_list *ap);
+void disp_str(arg_t *arg, va_list *ap);
+void disp_uint_p(arg_t *arg, va_list *ap);
+void disp_l_llq(arg_t *arg, va_list *ap);
+void disp_ul_ullq(arg_t *arg, va_list *ap);
+
+int define_len_preci(arg_t *arg, long long int data, int base);
+int define_len_space(arg_t *arg, long long int data, int base);
+void disp_zeros(char flag_zero, int len_space, int len_preci);
+void disp_width(int len_space, int len_preci);
+int display_arg(arg_t *arg, va_list *ap, char *ptrformat);
+
+int len_nbr(long long int nbr, int base);
+int what_type(char spe);
+void get_nbr_fromformat(char *format, int *i, int *nbr);
+int is_digit(char c, int len_nbr);
+int my_strlen_spec(char *str, char type);
+
+//static arg_t analyse_arg(char *format, int *i)
+void clean_flags(arg_t *arg);
+int my_printf(char *format, ...);
+
+void search_flags(char *format, int *i, arg_t *arg);
+int search_specifier(char *format, int *i, char dest[2]);
+int search_length(char *format, int *i, char dest[3]);
+
+#endif

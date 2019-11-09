@@ -6,21 +6,14 @@
 */
 
 #include "my.h"
+#include "my_printf.h"
 
-typedef struct arg {
-    char flags[6];
-    int width;
-    int precision;
-    char length[3];
-    char spec[2];
-} arg_t;
-
-#define LSPECIF 11
+#define LSPECIF 12
 #define LLEN 5
 
 const char FLAGS[5] = {'#', '0', '-', ' ', '+'};
-const char *SPECIF[11] = {"d", "i", "u", "o", "x", "X", "c", "s", "S", "p",
-"%"};
+const char *SPECIF[12] = {"d", "i", "u", "o", "x", "X", "c", "s", "S", "p",
+"%", "b"};
 const char *LEN[] = {"hh", "h", "ll", "l", "q"};
 
 void search_flags(char *format, int *i, arg_t *arg)

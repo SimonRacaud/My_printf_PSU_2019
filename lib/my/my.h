@@ -10,7 +10,9 @@
 
 void my_putchar(char c);
 int my_isneg(int nb);
-int my_put_nbr(int nb);
+int my_put_nbr(long long int nb);
+int my_put_nbr_ul(unsigned long long int nb);
+int my_putnbr_base(long int nbr, char const *base);
 void my_swap(int *a, int *b);
 int my_putstr(char const *str);
 int my_strlen(char const *str);

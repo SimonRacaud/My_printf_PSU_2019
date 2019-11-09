@@ -6,8 +6,20 @@
 */
 
 #include "my.h"
+#include "my_printf.h"
 
-int is_digit(char c, int len_nbr);
+int len_nbr(long long int nbr, int base)
+{
+    int len = 1;
+
+    if (nbr < 1)
+        return 0;
+    while ((nbr / base) >= 1) {
+        len++;
+        nbr /= base;
+    }
+    return len;
+}
 
 int what_type(char spe)
 {
@@ -33,4 +45,25 @@ void get_nbr_fromformat(char *format, int *i, int *nbr)
         (*i)++;
     while (is_digit(format[*i], 1))
         (*i)++;
+}
+
+int is_digit(char c, int len_nbr)
+{
+    if ((c > '0' && c <= '9') || (c == '0' && len_nbr > 0))
+        return (1);
+    return (0);
+}
+
+int my_strlen_spec(char *str, char type)
+{
+    int i = 0;
+
+    while (str[i] != '\0') {
+        if ((str[i] >= 32 && str[i] <= 126) || type == 's')
+            i++;
+        else
+            i += 4;
+        i++;
+    }
+    return i;
 }

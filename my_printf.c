@@ -6,26 +6,10 @@
 */
 
 #include <stdlib.h>
-#include <stdarg.h>
 #include "my.h"
+#include "my_printf.h"
 
-typedef struct arg {
-    char flags[6];
-    int width;
-    int precision;
-    char length[3];
-    char spec[2];
-} arg_t;
-
-void debug_display_arg(arg_t *arg); // DEBUG
-
-void search_flags(char *format, int *i, arg_t *arg);
-int search_specifier(char *format, int *i, char dest[2]);
-int search_length(char *format, int *i, char dest[3]);
-int what_type(char spe);
-void get_nbr_fromformat(char *format, int *i, int *nbr);
-int display_arg(arg_t *arg, va_list *ap, char *ptrformat);
-int is_digit(char c, int len_nbr);
+//void debug_display_arg(arg_t *arg); // DEBUG
 
 static arg_t analyse_arg(char *format, int *i)
 {

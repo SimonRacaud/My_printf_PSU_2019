@@ -5,11 +5,11 @@
 ** Task18
 */
 
-int my_putchar(char c);
+#include <unistd.h>
 
-static void base_conv(int nb, int base, char const *basestr)
+static void base_conv(long int nb, long int base, char const *basestr)
 {
-    int res[100];
+    long int res[100];
     int i = 0;
 
     while (nb != 0) {
@@ -17,16 +17,16 @@ static void base_conv(int nb, int base, char const *basestr)
         nb /= base;
     }
     for (int j = (i - 1); j >= 0; j--) {
-        my_putchar(basestr[res[j]]);
+        write(1, &basestr[res[j]], 1);
     }
 }
 
-int my_putnbr_base(int nbr, char const *base)
+int my_putnbr_base(long int nbr, char const *base)
 {
-    int nb_char = 0;
+    long int nb_char = 0;
 
     if (nbr < 0) {
-        my_putchar('-');
+        write(1, "-", 1);
         nbr = (-nbr);
     }
     while (base[nb_char] != '\0')

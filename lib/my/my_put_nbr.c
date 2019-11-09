@@ -6,29 +6,48 @@
 */
 
 void my_putchar(char c);
-static int poww3(int x, int n);
+static long int poww3(int x, int n);
 
-int my_put_nbr(int nb)
+int my_put_nbr_ul(unsigned long long int nb)
 {
     int i = 0;
     char c;
-    long int lnb = nb;
 
-    if (lnb < 0) {
+    if (nb < 0) {
         my_putchar('-');
-        lnb = -lnb;
+        nb = -nb;
     }
-    while (lnb / poww3(10, i) >= 10) {
+    while (nb / poww3(10, i) >= 10) {
         i++;
     }
     while (i >= 0) {
-        c = ((lnb / poww3(10, i)) % 10) + '0';
+        c = ((nb / poww3(10, i)) % 10) + '0';
         my_putchar(c);
         i--;
     }
     return (0);
 }
-static int poww3(int x, int n)
+
+int my_put_nbr(long long int nb)
+{
+    int i = 0;
+    char c;
+
+    if (nb < 0) {
+        my_putchar('-');
+        nb = -nb;
+    }
+    while (nb / poww3(10, i) >= 10) {
+        i++;
+    }
+    while (i >= 0) {
+        c = ((nb / poww3(10, i)) % 10) + '0';
+        my_putchar(c);
+        i--;
+    }
+    return (0);
+}
+static long int poww3(int x, int n)
 {
     if (n == 0) {
         return (1);
