@@ -50,7 +50,17 @@ int search_specifier(char *format, int *i, char dest[2])
     return -1;
 }
 
-int search_length(char *format, int *i, char dest[3])
+static int search_length_ext(int pattern_found, char *dest, int *i)
+{
+    if (pattern_found != -1) {
+        *i += my_strlen(LEN[pattern_found]);
+        my_strcpy(dest, LEN[pattern_found]);
+        return 0;
+    }
+    return -1;
+}
+
+int search_length(char *format, int *i, char *dest)
 {
     int pattern_found = -1;
     int idx_pat = 0;
@@ -67,10 +77,5 @@ int search_length(char *format, int *i, char dest[3])
             return 1;
         }
     }
-    if (pattern_found != -1) {
-        *i += my_strlen(LEN[pattern_found]);
-        my_strcpy(dest, LEN[pattern_found]);
-        return 0;
-    }
-    return -1;
+    return search_length_ext(pattern_found, dest, i);
 }

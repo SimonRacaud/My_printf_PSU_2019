@@ -18,22 +18,27 @@ typedef struct arg {
     char spec[2];
 } arg_t;
 
-void disp_int(arg_t *arg, va_list *ap);
-void disp_uint_xX(arg_t *arg, va_list *ap);
-void disp_uint_o(arg_t *arg, va_list *ap);
-void disp_uint_b(arg_t *arg, va_list *ap);
-void disp_uint_u(arg_t *arg, va_list *ap);
-void disp_char(arg_t *arg, va_list *ap);
-void disp_str(arg_t *arg, va_list *ap);
-void disp_uint_p(arg_t *arg, va_list *ap);
-void disp_l_llq(arg_t *arg, va_list *ap);
-void disp_ul_ullq(arg_t *arg, va_list *ap);
+int disp_int(arg_t *arg, va_list *ap);
+int disp_uint_xX(arg_t *arg, va_list *ap);
+int disp_uint_o(arg_t *arg, va_list *ap);
+int disp_uint_b(arg_t *arg, va_list *ap);
+int disp_uint_u(arg_t *arg, va_list *ap);
+
+int disp_char(arg_t *arg, va_list *ap);
+int disp_str(arg_t *arg, va_list *ap);
+int disp_uint_p(arg_t *arg, va_list *ap);
+int disp_l_llq(arg_t *arg, va_list *ap);
+int disp_ul_ullq(arg_t *arg, va_list *ap);
 
 int define_len_preci(arg_t *arg, long long int data, int base);
 int define_len_space(arg_t *arg, long long int data, int base);
 void disp_zeros(char flag_zero, int len_space, int len_preci);
 void disp_width(int len_space, int len_preci);
+
 int display_arg(arg_t *arg, va_list *ap, char *ptrformat);
+//static int display_if_invalid_arg(arg_t *arg, char *ptrformat)
+//static void display_arg_ext1(arg_t *arg, va_list *ap, int *len)
+//static void display_arg_ext1(arg_t *arg, va_list *ap, int *len)
 
 int len_nbr(long long int nbr, int base);
 int what_type(char spe);
@@ -48,5 +53,6 @@ int my_printf(char *format, ...);
 void search_flags(char *format, int *i, arg_t *arg);
 int search_specifier(char *format, int *i, char dest[2]);
 int search_length(char *format, int *i, char dest[3]);
+//static int search_length_ext(int pattern_found, char *dest)
 
 #endif

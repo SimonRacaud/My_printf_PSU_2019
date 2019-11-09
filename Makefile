@@ -10,6 +10,8 @@ SRC	=	main_test.c		\
 		my_put_double.c		\
 		my_printf_display.c	\
 		my_printf_disp01.c	\
+		my_printf_disp02.c	\
+		my_printf_disp_misc.c	\
 		my_printf_misc.c	\
 		search.c		\
 
@@ -17,6 +19,8 @@ SRC_TEST =	my_printf.c		\
 		my_put_double.c		\
 		my_printf_display.c	\
 		my_printf_disp01.c	\
+		my_printf_disp02.c	\
+		my_printf_disp_misc.c	\
 		my_printf_misc.c	\
 		search.c		\
 

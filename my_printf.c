@@ -9,8 +9,6 @@
 #include "my.h"
 #include "my_printf.h"
 
-//void debug_display_arg(arg_t *arg); // DEBUG
-
 static arg_t analyse_arg(char *format, int *i)
 {
     arg_t arg = {".....", -1, -1, "..", "."};

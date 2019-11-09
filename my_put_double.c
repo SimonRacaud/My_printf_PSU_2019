@@ -6,6 +6,7 @@
 */
 
 #include "my.h"
+
 #define POW(x, y) my_compute_power_rec(x, y)
 
 void my_put_double(double nb, int nb_decimal)
