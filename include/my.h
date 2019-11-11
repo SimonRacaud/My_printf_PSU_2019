@@ -8,7 +8,7 @@
 #ifndef MY_H_
 #define MY_H_
 
-void my_putchar(char c);
+int my_putchar(char c);
 int my_isneg(int nb);
 int my_put_nbr(long long int nb);
 int my_put_nbr_ul(unsigned long long int nb);

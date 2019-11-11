@@ -32,8 +32,9 @@ int disp_ul_ullq(arg_t *arg, va_list *ap);
 
 int define_len_preci(arg_t *arg, long long int data, int base);
 int define_len_space(arg_t *arg, long long int data, int base);
-void disp_zeros(char flag_zero, int len_space, int len_preci);
-void disp_width(int len_space, int len_preci);
+int disp_zeros(char flag_zero, int len_space, int len_preci);
+int disp_width(int len_space, int len_preci);
+void disp_not_printable_char(char c);
 
 int display_arg(arg_t *arg, va_list *ap, char *ptrformat);
 //static int display_if_invalid_arg(arg_t *arg, char *ptrformat)

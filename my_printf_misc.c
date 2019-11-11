@@ -63,7 +63,6 @@ int my_strlen_spec(char *str, char type)
             i++;
         else
             i += 4;
-        i++;
     }
     return i;
 }

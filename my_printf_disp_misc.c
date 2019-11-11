@@ -36,20 +36,36 @@ int define_len_preci(arg_t *arg, long long int data, int base)
     return zero;
 }
 
-void disp_zeros(char flag_zero, int len_space, int len_preci)
+int disp_zeros(char flag_zero, int len_space, int len_preci)
 {
     if (flag_zero == '0') {
         for (int i = 0; i < len_space; i++)
             my_putchar('0');
+        return len_space;
     }
     if (len_preci > 0) {
         for (int i = 0; i < len_preci; i++)
             my_putchar('0');
+        return len_preci;
     }
+    return 0;
 }
 
-void disp_width(int len_space, int len_preci)
+int disp_width(int len_space, int len_preci)
 {
     for (int i = 0; i < len_space - len_preci; i++)
         my_putchar(' ');
+    if (len_space - len_preci >= 0)
+        return (len_space - len_preci);
+    return 0;
+}
+
+void disp_not_printable_char(char c)
+{
+    int len_nb = len_nbr(c, 8);
+
+    my_putchar('\\');
+    for (int i = 0; i < 3 - len_nb; i++)
+        my_putchar('0');
+    my_putnbr_base(c, "01234567");
 }
