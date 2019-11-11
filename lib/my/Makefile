@@ -36,11 +36,19 @@ SRC	=	my_compute_power_rec.c	\
 		my_strncpy.c		\
 		my_strstr.c		\
 		my_strupcase.c		\
-		my_swap.c
+		my_swap.c		\
+		my_printf.c             \
+		my_put_double.c         \
+		my_printf_display.c     \
+		my_printf_disp01.c      \
+		my_printf_disp02.c      \
+		my_printf_disp_misc.c   \
+		my_printf_misc.c        \
+		my_printf_search.c
 
 OBJ	=	$(SRC:.c=.o)
 
-CFLAGS	=	-Wall -Wextra
+CFLAGS	=	-Wall -Wextra -I../../include
 
 NAME	=	libmy.a
 
@@ -48,6 +56,7 @@ all:	$(NAME)
 
 $(NAME): $(OBJ)
 	@cp my.h ../../include/
+	@cp my_printf.h ../../include/
 	ar rc $(NAME) $(OBJ)
 	@cp libmy.a ../
 

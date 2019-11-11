@@ -14,11 +14,6 @@ int my_put_nbr_ul(unsigned long long int nb)
     int len_wrote = 0;
     char c;
 
-    if (nb < 0) {
-        my_putchar('-');
-        nb = -nb;
-        len_wrote++;
-    }
     while (nb / poww3(10, i) >= 10) {
         i++;
     }
