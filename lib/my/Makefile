@@ -46,6 +46,10 @@ SRC	=	my_compute_power_rec.c	\
 		my_printf_misc.c        \
 		my_printf_search.c
 
+SRC_TEST	=	../../tests/test_my_printf.c		\
+				../../tests/test_my_printf_int.c	\
+				../../tests/test_my_printf_uint.c
+
 OBJ	=	$(SRC:.c=.o)
 
 CFLAGS	=	-Wall -Wextra -I../../include
@@ -62,6 +66,11 @@ $(NAME): $(OBJ)
 
 clean:
 	@$(RM) $(OBJ)
+
+tests_run:	$(OBJ) $(TOBJ)
+	gcc $(OBJ) $(SRC_TEST) -o my_printf_utest -I../../include -lcriterion && ./my_printf_utest
+	rm -f ./my_printf_utest
+	make clean
 
 fclean:	clean
 	@$(RM) $(NAME)

@@ -69,20 +69,17 @@ int disp_uint_p(arg_t *arg, va_list *ap)
 int disp_l_llq(arg_t *arg, va_list *ap)
 {
     long long int data;
-    int len_space = define_len_space(arg, (long long int)data, 10);
-    int len_preci = define_len_preci(arg, (long long int)data, 10);
+    int len_space;
+    int len_preci;
     int len_wrote = 0;
 
     if (arg->length[0] == 'l' && arg->length[1] == '.')
         data = va_arg(*ap, long int);
     else
         data = va_arg(*ap, long long int);
-    if (arg->flags[3] == ' ' && data != 0)
-        len_wrote += my_putchar(' ');
-    if (arg->flags[1] != '0' && arg->flags[2] != '-')
-        len_wrote += disp_width(len_space, len_preci);
-    if (arg->flags[4] == '+' && data >= 0)
-        len_wrote += my_putchar('+');
+    len_space = define_len_space(arg, (long long int)data, 10);
+    len_preci = define_len_preci(arg, (long long int)data, 10);
+    len_wrote += disp_llq_ext(arg, &data, len_space, len_preci);
     len_wrote += disp_zeros(arg->flags[1], len_space, len_preci);
     len_wrote += my_put_nbr(data);
     if (arg->flags[2] == '-')
@@ -93,14 +90,16 @@ int disp_l_llq(arg_t *arg, va_list *ap)
 int disp_ul_ullq(arg_t *arg, va_list *ap)
 {
     unsigned long long int data;
-    int len_space = define_len_space(arg, (long long int)data, 10);
-    int len_preci = define_len_preci(arg, (long long int)data, 10);
+    int len_space;
+    int len_preci;
     int len_wrote = 0;
 
     if (arg->length[0] == 'l' && arg->length[1] == '.')
         data = va_arg(*ap, unsigned long int);
     else
         data = va_arg(*ap, unsigned long long int);
+    len_space = define_len_space(arg, (long long int)data, 10);
+    len_preci = define_len_preci(arg, (long long int)data, 10);
     if (arg->flags[1] != '0' && arg->flags[2] != '-')
         len_wrote += disp_width(len_space, len_preci);
     if (arg->flags[0] == '#' && arg->spec[0] == 'o' && data != 0)

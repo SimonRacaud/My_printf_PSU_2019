@@ -37,6 +37,8 @@ int disp_width(int len_space, int len_preci);
 void disp_not_printable_char(char c);
 
 int display_arg(arg_t *arg, va_list *ap, char *ptrformat);
+int disp_llq_ext(arg_t *arg, long long int *data, int len_space,
+int len_preci);
 
 int len_nbr(long long int nbr, int base);
 int what_type(char spe);

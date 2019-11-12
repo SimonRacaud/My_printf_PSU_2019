@@ -77,3 +77,16 @@ int display_arg(arg_t *arg, va_list *ap, char *ptrformat)
     }
     return len;
 }
+
+int disp_llq_ext(arg_t *arg, long long int *data, int len_space, int len_preci)
+{
+    int len_wrote = 0;
+
+    if (arg->flags[3] == ' ' && *data != 0)
+        len_wrote += my_putchar(' ');
+    if (arg->flags[1] != '0' && arg->flags[2] != '-')
+        len_wrote += disp_width(len_space, len_preci);
+    if (arg->flags[4] == '+' && *data >= 0)
+        len_wrote += my_putchar('+');
+    return len_wrote;
+}
