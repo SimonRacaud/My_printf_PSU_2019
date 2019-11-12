@@ -18,9 +18,7 @@ static arg_t analyse_arg(char *format, int *i)
         get_nbr_fromformat(format, i, &(arg.width));
     if (format[*i] == '.')
         get_nbr_fromformat(format, i, &(arg.precision));
-    if (search_length(format, i, arg.length)) {
-        // supprimer pattern
-    }
+    search_length(format, i, arg.length);
     search_specifier(format, i, arg.spec);
     return arg;
 }

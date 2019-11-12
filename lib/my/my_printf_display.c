@@ -9,29 +9,28 @@
 #include "my_printf.h"
 #include <stdarg.h>
 
-const int (*TYPES[10])(arg_t *arg, va_list *ap) = {&disp_int, &disp_uint_xX,
+const int (*TYPES[12])(arg_t *arg, va_list *ap) = {&disp_int, &disp_uint_xX,
 &disp_uint_o, &disp_uint_b, &disp_uint_u, &disp_char, &disp_str, &disp_uint_p,
-&disp_l_llq, &disp_ul_ullq};
+&disp_l_llq, &disp_ul_ullq, &disp_short, &disp_ushort};
 
 static int display_if_invalid_arg(arg_t *arg, char *ptrformat)
 {
     int i = 0;
 
-    if (arg->spec[0] == '.') {
-        while (*(ptrformat - i) != '%')
-            i++;
-        for (int j = 0; j <= i; j++)
-            my_putchar(*(ptrformat - (i - j)));
-        return i;
-    }
-    return 0;
+    if (arg->spec[0] != '.')
+        return 0;
+    while (*(ptrformat - i) != '%')
+        i++;
+    for (int j = 0; j <= i; j++)
+        my_putchar(*(ptrformat - (i - j)));
+    return (i + 1);
 }
 
 static void display_arg_ext2(arg_t *arg, va_list *ap, int *len)
 {
     if (arg->spec[0] == 'c' || arg->length[1] == 'h')
         *len = TYPES[5](arg, ap);
-    if (what_type(arg->spec[0]) == 1)
+    if (what_type(arg->spec[0]) == 1 && arg->length[0] != 'h')
         *len = TYPES[0](arg, ap);
     if (arg->spec[0] == 'x' || arg->spec[0] == 'X')
         *len = TYPES[1](arg, ap);
@@ -59,6 +58,10 @@ static void display_arg_ext1(arg_t *arg, va_list *ap, int *len)
             *len = TYPES[9](arg, ap);
         }
     }
+    if (what_type(arg->spec[0]) != 2 && my_strcmp(arg->length, "h") == 0)
+        *len = TYPES[10](arg, ap);
+    if (what_type(arg->spec[0]) == 2 && my_strcmp(arg->length, "h") == 0)
+        *len = TYPES[11](arg, ap);
 }
 
 int display_arg(arg_t *arg, va_list *ap, char *ptrformat)

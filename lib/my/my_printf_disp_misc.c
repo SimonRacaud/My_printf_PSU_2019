@@ -16,6 +16,8 @@ int define_len_space(arg_t *arg, long long int data, int base)
 
     if (arg->flags[0] == '#' && arg->spec[0] != 'o')
         len_flags += 2;
+    if (arg->flags[0] == '#' && arg->spec[0] == 'o')
+        len_flags++;
     if (arg->flags[3] == ' ' || arg->flags[4] == '+')
         len_flags++;
     space = arg->width - len_flags;
@@ -31,6 +33,8 @@ int define_len_preci(arg_t *arg, long long int data, int base)
 
     zero = arg->precision;
     zero -= len_nbr(data, base);
+    if (arg->flags[0] == '#' && arg->spec[0] == 'o')
+        zero--;
     if (zero < 0)
         zero = 0;
     return zero;
@@ -60,7 +64,7 @@ int disp_width(int len_space, int len_preci)
     return 0;
 }
 
-void disp_not_printable_char(char c)
+int disp_not_printable_char(char c)
 {
     int len_nb = len_nbr(c, 8);
 
@@ -68,4 +72,5 @@ void disp_not_printable_char(char c)
     for (int i = 0; i < 3 - len_nb; i++)
         my_putchar('0');
     my_putnbr_base(c, "01234567");
+    return 4;
 }

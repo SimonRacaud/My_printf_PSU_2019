@@ -17,7 +17,10 @@ int disp_char(arg_t *arg, va_list *ap)
 
     if (arg->flags[1] != '0' && arg->flags[2] != '-')
         len_wrote += disp_width(space_len, 0);
-    len_wrote += my_putchar(data);
+    if (arg->length[1] == 'h')
+        len_wrote += my_put_nbr(data);
+    else
+        len_wrote += my_putchar(data);
     if (arg->flags[2] == '-')
         len_wrote += disp_width(space_len, 0);
     return len_wrote;
@@ -26,23 +29,23 @@ int disp_char(arg_t *arg, va_list *ap)
 int disp_str(arg_t *arg, va_list *ap)
 {
     char *data = va_arg(*ap, char *);
-    int space_len = arg->width - my_strlen_spec(data, arg->spec[0]);
+    int sp_len = arg->width - strlen_spec(data, arg->spec[0], arg->precision);
     int len_wrote = 0;
 
     if (arg->precision == -1)
-        arg->precision = my_strlen_spec(data, arg->spec[0]);
+        arg->precision = strlen_spec(data, arg->spec[0], -1);
     if (arg->flags[1] != '0' && arg->flags[2] != '-')
-        len_wrote += disp_width(space_len, 0);
+        len_wrote += disp_width(sp_len, 0);
     for (int i = 0; i < arg->precision && data[i] != '\0'; i++) {
         if (arg->spec[0] == 's' || (data[i] >= 32 && data[i] <= 126)) {
-            my_putchar(data[i]);
+            len_wrote += my_putchar(data[i]);
         } else {
-            disp_not_printable_char(data[i]);
+            len_wrote += disp_not_printable_char(data[i]);
         }
     }
     if (arg->flags[2] == '-')
-        len_wrote += disp_width(space_len, 0);
-    return (my_strlen_spec(data, arg->spec[0]) + len_wrote);
+        len_wrote += disp_width(sp_len, 0);
+    return len_wrote;
 }
 
 int disp_uint_p(arg_t *arg, va_list *ap)

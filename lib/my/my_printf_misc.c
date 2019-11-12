@@ -12,8 +12,10 @@ int len_nbr(long long int nbr, int base)
 {
     int len = 1;
 
-    if (nbr < 1)
-        return 0;
+    if (nbr < 1) {
+        nbr = -nbr;
+        len++;
+    }
     while ((nbr / base) >= 1) {
         len++;
         nbr /= base;
@@ -54,15 +56,16 @@ int is_digit(char c, int len_nbr)
     return (0);
 }
 
-int my_strlen_spec(char *str, char type)
+int strlen_spec(char *str, char type, int len)
 {
-    int i = 0;
+    int i = -1;
+    int length = 0;
 
-    while (str[i] != '\0') {
+    while (str[++i] != '\0' && (len == -1 || i < len)) {
         if ((str[i] >= 32 && str[i] <= 126) || type == 's')
-            i++;
+            length++;
         else
-            i += 4;
+            length += 4;
     }
-    return i;
+    return length;
 }

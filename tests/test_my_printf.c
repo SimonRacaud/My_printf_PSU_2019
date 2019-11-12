@@ -174,16 +174,73 @@ Test(my_printf, t26_simpleint_withstr, .init = redirect_all_stdout)
     cr_assert_stdout_eq_str("i (123456789)");
 }
 
-Test(my_printf, t27_len_wrote)
+Test(my_printf, t27_len_wrote, .init = redirect_all_stdout)
 {
     int ret = my_printf("%d\n", 123456789);
 
     cr_assert_eq(ret, 10);
 }
 
-Test(my_printf, t28_len_wrote2)
+Test(my_printf, t28_len_wrote2, .init = redirect_all_stdout)
 {
     int ret = my_printf("%s %#-5.8o\n", "abc", 2);
 
-    cr_assert_eq(ret, 14);
+    cr_assert_eq(ret, 13);
+}
+
+Test(my_printf, t29_len_wrote3, .init = redirect_all_stdout)
+{
+    int ret = my_printf("%.5s\n", "0123456789");
+
+    cr_assert_eq(ret, 6);
+}
+
+Test(my_printf, t30_len_wrote4, .init = redirect_all_stdout)
+{
+    int *ptr = NULL;
+    int ret = my_printf("%p\n", ptr);
+
+    cr_assert_eq(ret, 6);
+}
+
+Test(my_printf, t31_len_wrote5, .init = redirect_all_stdout)
+{
+    int data = 42;
+    int *ptr = &data;
+    int ret = my_printf("%p\n", ptr);
+
+    cr_assert_eq(ret, 15);
+}
+
+Test(my_printf, t32_len_wrote6, .init = redirect_all_stdout)
+{
+    int ret = my_printf("%%\n");
+
+    cr_assert_eq(ret, 2);
+}
+
+Test(my_printf, t33_len_wrote7, .init = redirect_all_stdout)
+{
+    int ret = my_printf("%#0-hh5.7y\n");
+
+    cr_assert_eq(ret, 11);
+}
+
+Test(my_printf, t34_len_wrote8, .init = redirect_all_stdout)
+{
+    int ret = my_printf("%b\n", 42);
+
+    cr_assert_eq(ret, 7);
+}
+
+Test(my_printf, t35_q, .init = redirect_all_stdout)
+{
+    my_printf("%qd", 1234567891234567899);
+    cr_assert_stdout_eq_str("1234567891234567899");
+}
+
+Test(my_printf, t36_q, .init = redirect_all_stdout)
+{
+    my_printf("%qu", 18446744073709551615);
+    cr_assert_stdout_eq_str("18446744073709551615");
 }

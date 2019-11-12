@@ -10,6 +10,8 @@
 
 #include <stdarg.h>
 
+#define ABS(x) (x < 0) ? (-x) : x
+
 typedef struct arg {
     char flags[6];
     int width;
@@ -30,11 +32,14 @@ int disp_uint_p(arg_t *arg, va_list *ap);
 int disp_l_llq(arg_t *arg, va_list *ap);
 int disp_ul_ullq(arg_t *arg, va_list *ap);
 
+int disp_short(arg_t *arg, va_list *ap);
+int disp_ushort(arg_t *arg, va_list *ap);
+
 int define_len_preci(arg_t *arg, long long int data, int base);
 int define_len_space(arg_t *arg, long long int data, int base);
 int disp_zeros(char flag_zero, int len_space, int len_preci);
 int disp_width(int len_space, int len_preci);
-void disp_not_printable_char(char c);
+int disp_not_printable_char(char c);
 
 int display_arg(arg_t *arg, va_list *ap, char *ptrformat);
 int disp_llq_ext(arg_t *arg, long long int *data, int len_space,
@@ -44,10 +49,9 @@ int len_nbr(long long int nbr, int base);
 int what_type(char spe);
 void get_nbr_fromformat(char *format, int *i, int *nbr);
 int is_digit(char c, int len_nbr);
-int my_strlen_spec(char *str, char type);
+int strlen_spec(char *str, char type, int len);
 
 void clean_flags(arg_t *arg);
-
 
 void search_flags(char *format, int *i, arg_t *arg);
 int search_specifier(char *format, int *i, char dest[2]);

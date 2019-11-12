@@ -16,14 +16,16 @@ int disp_int(arg_t *arg, va_list *ap)
     int len_preci = define_len_preci(arg, (long long int)data, 10);
     int len_wrote = 0;
 
-    if (arg->flags[3] == ' ' && data != 0)
+    if (arg->flags[3] == ' ' && data > 0)
         len_wrote += my_putchar(' ');
     if (arg->flags[1] != '0' && arg->flags[2] != '-')
         len_wrote += disp_width(len_space, len_preci);
     if (arg->flags[4] == '+' && data >= 0)
         len_wrote += my_putchar('+');
+    if (data < 0)
+        len_wrote += my_putchar('-');
     len_wrote += disp_zeros(arg->flags[1], len_space, len_preci);
-    len_wrote += my_put_nbr(data);
+    len_wrote += my_put_nbr(ABS(data));
     if (arg->flags[2] == '-')
         len_wrote += disp_width(len_space, len_preci);
     return len_wrote;
