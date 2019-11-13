@@ -67,7 +67,8 @@ $(NAME): $(OBJ)
 	@cp my.h ../../include/
 	@cp my_printf.h ../../include/
 	ar rc $(NAME) $(OBJ)
-	@cp libmy.a ../
+	@cp $(NAME) ../
+	@cp $(NAME) ../../
 
 clean:
 	@$(RM) $(OBJ)
