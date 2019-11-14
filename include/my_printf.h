@@ -10,7 +10,9 @@
 
 #include <stdarg.h>
 
-#define ABS(x) (x < 0) ? (-x) : x
+#define ABS(x) (x < 0) ? -(long int)x : x
+#define LSPECIF 12
+#define LLEN 5
 
 typedef struct arg {
     char flags[6];
@@ -21,7 +23,7 @@ typedef struct arg {
 } arg_t;
 
 int disp_int(arg_t *arg, va_list *ap);
-int disp_uint_xX(arg_t *arg, va_list *ap);
+int disp_uint_x_x(arg_t *arg, va_list *ap);
 int disp_uint_o(arg_t *arg, va_list *ap);
 int disp_uint_b(arg_t *arg, va_list *ap);
 int disp_uint_u(arg_t *arg, va_list *ap);
@@ -34,6 +36,7 @@ int disp_ul_ullq(arg_t *arg, va_list *ap);
 
 int disp_short(arg_t *arg, va_list *ap);
 int disp_ushort(arg_t *arg, va_list *ap);
+int disp_uint_lx(arg_t *arg, va_list *ap);
 
 int define_len_preci(arg_t *arg, long long int data, int base);
 int define_len_space(arg_t *arg, long long int data, int base);

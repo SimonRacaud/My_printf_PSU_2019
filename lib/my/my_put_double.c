@@ -7,8 +7,6 @@
 
 #include "my.h"
 
-#define POW(x, y) my_compute_power_rec(x, y)
-
 static void round_nbr(double *nbr)
 {
     if ((int)*nbr % 10 >= 5)

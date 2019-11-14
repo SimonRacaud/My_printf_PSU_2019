@@ -75,3 +75,15 @@ Test(my_printf, width_sup_len_sup__prec_and_s_type, .init = redirect)
     my_printf("%10.3s", "HELLO");
     cr_assert_stdout_eq_str("       HEL");
 }
+
+Test(my_printf, test_followup, .init = redirect)
+{
+    my_printf("%d %d %d\n", -0, -42, 0x80000000);
+    cr_assert_stdout_eq_str("0 -42 -2147483648\n");
+}
+
+Test(my_printf, test_followup2, .init = redirect)
+{
+    my_printf("%p %x %lx\n", 0x42424242, 0x42424242, 0x42424242);
+    cr_assert_stdout_eq_str("0x42424242 42424242 42424242\n");
+}

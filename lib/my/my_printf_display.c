@@ -9,9 +9,21 @@
 #include "my_printf.h"
 #include <stdarg.h>
 
-const int (*TYPES[12])(arg_t *arg, va_list *ap) = {&disp_int, &disp_uint_xX,
-&disp_uint_o, &disp_uint_b, &disp_uint_u, &disp_char, &disp_str, &disp_uint_p,
-&disp_l_llq, &disp_ul_ullq, &disp_short, &disp_ushort};
+static const int (*types[13])(arg_t *arg, va_list *ap) = {
+    &disp_int,
+    &disp_uint_x_x,
+    &disp_uint_o,
+    &disp_uint_b,
+    &disp_uint_u,
+    &disp_char,
+    &disp_str,
+    &disp_uint_p,
+    &disp_l_llq,
+    &disp_ul_ullq,
+    &disp_short,
+    &disp_ushort,
+    &disp_uint_lx
+};
 
 static int display_if_invalid_arg(arg_t *arg, char *ptrformat)
 {
@@ -29,39 +41,41 @@ static int display_if_invalid_arg(arg_t *arg, char *ptrformat)
 static void display_arg_ext2(arg_t *arg, va_list *ap, int *len)
 {
     if (arg->spec[0] == 'c' || arg->length[1] == 'h')
-        *len = TYPES[5](arg, ap);
+        *len = types[5](arg, ap);
     if (what_type(arg->spec[0]) == 1 && arg->length[0] != 'h')
-        *len = TYPES[0](arg, ap);
+        *len = types[0](arg, ap);
     if (arg->spec[0] == 'x' || arg->spec[0] == 'X')
-        *len = TYPES[1](arg, ap);
+        *len = types[1](arg, ap);
     if (arg->spec[0] == 'o')
-        *len = TYPES[2](arg, ap);
+        *len = types[2](arg, ap);
     if (arg->spec[0] == 'b')
-        *len = TYPES[3](arg, ap);
+        *len = types[3](arg, ap);
     if (arg->spec[0] == 'u')
-        *len = TYPES[4](arg, ap);
+        *len = types[4](arg, ap);
     if (arg->spec[0] == 's' || arg->spec[0] == 'S')
-        *len = TYPES[6](arg, ap);
+        *len = types[6](arg, ap);
     if (arg->spec[0] == 'p')
-        *len = TYPES[7](arg, ap);
+        *len = types[7](arg, ap);
 }
 
 static void display_arg_ext1(arg_t *arg, va_list *ap, int *len)
 {
     if (what_type(arg->spec[0]) == 1) {
         if (arg->length[0] == 'l' || arg->length[0] == 'q') {
-            *len = TYPES[8](arg, ap);
+            *len = types[8](arg, ap);
         }
     }
     if (what_type(arg->spec[0]) == 2) {
-        if (arg->length[0] == 'l' || arg->length[0] == 'q') {
-            *len = TYPES[9](arg, ap);
+        if (arg->spec[0] == 'x' || arg->spec[0] == 'X') {
+            *len = types[12](arg, ap);
+        } else if (arg->length[0] == 'l' || arg->length[0] == 'q') {
+            *len = types[9](arg, ap);
         }
     }
     if (what_type(arg->spec[0]) != 2 && my_strcmp(arg->length, "h") == 0)
-        *len = TYPES[10](arg, ap);
+        *len = types[10](arg, ap);
     if (what_type(arg->spec[0]) == 2 && my_strcmp(arg->length, "h") == 0)
-        *len = TYPES[11](arg, ap);
+        *len = types[11](arg, ap);
 }
 
 int display_arg(arg_t *arg, va_list *ap, char *ptrformat)

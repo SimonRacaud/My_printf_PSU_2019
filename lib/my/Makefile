@@ -42,18 +42,18 @@ SRC	=	my_compute_power_rec.c	\
 		my_printf_display.c     \
 		my_printf_disp01.c      \
 		my_printf_disp02.c      \
-		my_printf_disp03.c		\
+		my_printf_disp03.c	\
 		my_printf_disp_misc.c   \
 		my_printf_misc.c        \
 		my_printf_search.c
 
 SRC_TEST	=	../../tests/test_my_printf.c		\
-				../../tests/test_my_printf_int.c	\
-				../../tests/test_my_printf_uint.c	\
-				../../tests/test_flag.c				\
-				../../tests/test_global.c			\
-				../../tests/test_size.c				\
-				../../tests/test_type.c
+			../../tests/test_my_printf_int.c	\
+			../../tests/test_my_printf_uint.c	\
+			../../tests/test_flag.c			\
+			../../tests/test_global.c		\
+			../../tests/test_size.c			\
+			../../tests/test_type.c
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -74,7 +74,7 @@ clean:
 	@$(RM) $(OBJ)
 
 tests_run:	$(OBJ) $(TOBJ)
-	gcc $(OBJ) $(SRC_TEST) -o my_printf_utest -I../../include -lcriterion && ./my_printf_utest
+	#gcc $(OBJ) $(SRC_TEST) -o my_printf_utest -I../../include --coverage -lcriterion && ./my_printf_utest
 	rm -f ./my_printf_utest
 	make clean
 

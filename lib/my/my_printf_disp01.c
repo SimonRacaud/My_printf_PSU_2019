@@ -31,7 +31,7 @@ int disp_int(arg_t *arg, va_list *ap)
     return len_wrote;
 }
 
-int disp_uint_xX(arg_t *arg, va_list *ap)
+int disp_uint_x_x(arg_t *arg, va_list *ap)
 {
     unsigned int data = va_arg(*ap, unsigned int);
     int len_space = define_len_space(arg, (long long int)data, 16);

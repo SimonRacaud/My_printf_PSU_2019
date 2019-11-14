@@ -10,6 +10,8 @@
 
 #include <stdarg.h>
 
+#define POW(x, y) my_compute_power_rec(x, y)
+
 int my_putchar(char c);
 int my_isneg(int nb);
 int my_put_nbr(long long int nb);
