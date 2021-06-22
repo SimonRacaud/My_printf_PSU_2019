@@ -1,4 +1,4 @@
-# My_printf_PSU_2019
+# printf_PSU_2019
 printf function of the C standard library rewritten.
 
 # Epitech Mark
